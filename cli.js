@@ -57,3 +57,30 @@ function mainMenu() {
         }
       });
   }
+
+  function viewAllDepartments() {
+    getAllDepartments()
+      .then(([rows]) => {
+        console.table(rows);
+        mainMenu();
+      })
+      .catch((err) => console.error(err));
+  }
+
+  function viewAllRoles() {
+    getAllRoles()
+      .then(([rows]) => {
+        console.table(rows);
+        mainMenu();
+      })
+      .catch((err) => console.error(err));
+  }
+  
+  function viewAllEmployees() {
+    getAllEmployees()
+      .then(([rows]) => {
+        console.table(rows);
+        mainMenu();
+      })
+      .catch((err) => console.error(err));
+  }
