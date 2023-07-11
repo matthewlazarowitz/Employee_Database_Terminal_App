@@ -26,3 +26,17 @@ function getAllDepartments() {
   function addEmployee(employee) {
       return connection.query('INSERT INTO employee SET ?', employee);
     }
+
+  function updateEmployeeRole(employeeId, roleId) {
+        return connection.query('UPDATE employee SET role_id = ? WHERE id = ?', [roleId, employeeId]);
+      }
+      
+    module.exports = {
+        getAllDepartments,
+        getAllRoles,
+        getAllEmployees,
+        addDepartment,
+        addRole,
+        addEmployee,
+        updateEmployeeRole
+      };
