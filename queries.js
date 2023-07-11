@@ -11,3 +11,18 @@ function getAllDepartments() {
   function getAllEmployees() {
     return connection.query('SELECT * FROM employee');
   }
+
+
+  function addDepartment(department) {
+    return connection.query('INSERT INTO department SET ?', department);
+  }
+  
+
+  function addRole(role) {
+    return connection.query('INSERT INTO role SET ?', role);
+  }
+  
+  
+  function addEmployee(employee) {
+      return connection.query('INSERT INTO employee SET ?', employee);
+    }
