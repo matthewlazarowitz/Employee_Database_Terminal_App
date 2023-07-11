@@ -102,3 +102,41 @@ function mainMenu() {
           .catch((err) => console.error(err));
       });
   }
+
+  function promptAddRole() {
+    inquirer
+      .prompt([
+        {
+          name: 'title',
+          message: 'Enter the title of the role:',
+        },
+        {
+          name: 'salary',
+          message: 'Enter the salary for the role:',
+          validate: (value) => {
+            if (isNaN(value)) {
+              return 'Please enter a valid salary';
+            }
+            return true;
+          }
+        },
+        {
+          name: 'department_id',
+          message: 'Enter the department ID for the role:',
+          validate: (value) => {
+            if (isNaN(value)) {
+              return 'Please enter a valid department ID';
+            }
+            return true;
+          }
+        }
+      ])
+      .then((answer) => {
+        addRole(answer)
+          .then(() => {
+            console.log('Role added successfully!');
+            mainMenu();
+          })
+          .catch((err) => console.error(err));
+      });
+  }
