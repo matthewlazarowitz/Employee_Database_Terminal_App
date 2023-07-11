@@ -84,3 +84,21 @@ function mainMenu() {
       })
       .catch((err) => console.error(err));
   }
+
+  function promptAddDepartment() {
+    inquirer
+      .prompt([
+        {
+          name: 'name',
+          message: 'Enter the name of the department:',
+        }
+      ])
+      .then((answer) => {
+        addDepartment(answer)
+          .then(() => {
+            console.log('Department added successfully!');
+            mainMenu();
+          })
+          .catch((err) => console.error(err));
+      });
+  }
