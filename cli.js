@@ -192,3 +192,57 @@ function mainMenu() {
           .catch((err) => console.error(err));
       });
   }
+
+  function promptUpdateEmployeeRole() {
+    let employees;
+    let roles;
+  
+    getAllEmployees()
+      .then(([employeeRows]) => {
+        employees = employeeRows;
+        return getAllRoles();
+      })
+      .then(([roleRows]) => {
+        roles = roleRows;
+  
+        const employeeChoices = employees.map((employee) => ({
+          name: `${employee.first_name} ${employee.last_name}`,
+          value: employee.id
+        }));
+  
+        const roleChoices = roles.map((role) => ({
+          name: role.title,
+          value: role.id
+        }));
+  
+        inquirer
+          .prompt([
+            {
+              type: 'list',
+              name: 'employeeId',
+              message: 'Select the employee to update:',
+              choices: employeeChoices
+            },
+            {
+              type: 'list',
+              name: 'roleId',
+              message: 'Select the new role for the employee:',
+              choices: roleChoices
+            }
+          ])
+          .then((answer) => {
+            updateEmployeeRole(answer.employeeId, answer.roleId)
+              .then(() => {
+                console.log('Employee role updated successfully!');
+                mainMenu();
+              })
+              .catch((err) => console.error(err));
+          });
+      })
+      .catch((err) => console.error(err));
+  }
+  
+  
+  console.log('Employee Management System');
+  mainMenu();
+  
